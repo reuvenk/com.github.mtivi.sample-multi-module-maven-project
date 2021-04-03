@@ -31,3 +31,8 @@ build/
 
 ### VS Code ###
 .vscode/
+
+
+### The Github actions currently creates a settings.xml file ###
+### in order for the mvn releaser plugin to have authentication to push ###
+settings.xml
