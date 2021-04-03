@@ -17,6 +17,8 @@ jobs:
           server-id: 'github'
           settings-path: "${{ github.workspace }}"
       - name: 'Release releaser:release'
+        # The settings.xml must be added to the .gitignore, otherwise the release
+        # will fail due to uncommited changes.
         run: 'mvn -B releaser:release -s $GITHUB_WORKSPACE/settings.xml -f pom.xml'
         env:
           GITHUB_TOKEN: "${{ github.token }}"
