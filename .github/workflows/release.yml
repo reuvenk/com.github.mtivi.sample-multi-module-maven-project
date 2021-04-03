@@ -1,0 +1,22 @@
+name: Release
+on:
+  push:
+    branches:
+      - 'main'
+jobs:
+  build:
+    runs-on: 'ubuntu-latest'
+    steps:
+      - uses: 'actions/checkout@v2'
+        with:
+          fetch-depth: 0
+      - name: 'Configure maven settings'
+        uses: 'actions/setup-java@v1'
+        with:
+          java-version: 11
+          server-id: 'github'
+          settings-path: "${{ github.workspace }}"
+      - name: 'Release releaser:release'
+        run: 'mvn -B releaser:release -s $GITHUB_WORKSPACE/settings.xml -f pom.xml'
+        env:
+          GITHUB_TOKEN: "${{ github.token }}"
