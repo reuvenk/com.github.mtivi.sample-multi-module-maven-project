@@ -25,7 +25,7 @@ public class WeatherService {
 
     /**
      * The current weather is not a forecast.
-     * @return
+     * @return the current weather
      */
     public Weather currentWeather() {
         var weather = randomWeather();
