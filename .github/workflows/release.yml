@@ -16,6 +16,8 @@ jobs:
           java-version: 11
           server-id: 'github'
           settings-path: "${{ github.workspace }}"
+      - name: 'Maven install'
+        run: 'mvn -B install -DskipTests=true'
       - name: 'Release releaser:release'
         # The settings.xml must be added to the .gitignore, otherwise the release
         # will fail due to uncommited changes.
