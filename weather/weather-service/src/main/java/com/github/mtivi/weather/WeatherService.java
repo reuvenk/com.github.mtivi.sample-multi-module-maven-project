@@ -1,8 +1,11 @@
 package com.github.mtivi.weather;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.time.LocalDateTime;
 import java.util.Random;
 
+@Slf4j
 public class WeatherService {
 
     /**
@@ -25,6 +28,10 @@ public class WeatherService {
      * @return
      */
     public Weather currentWeather() {
+        var weather = randomWeather();
+        if( weather.isExtreme() ){
+            log.warn("Stay indoors! There is currently extreme weather going on!");
+        }
         return randomWeather();
     }
 
