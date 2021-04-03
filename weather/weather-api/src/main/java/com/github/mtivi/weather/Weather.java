@@ -3,9 +3,6 @@ package com.github.mtivi.weather;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
-import java.util.Collections;
-import java.util.List;
-
 @Getter
 @RequiredArgsConstructor
 public enum Weather {
