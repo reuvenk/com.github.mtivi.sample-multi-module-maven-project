@@ -1,26 +1,42 @@
 package com.github.mtivi.weather;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import java.util.Random;
 
 public class WeatherService {
 
-    private final List<Weather> weathers = new ArrayList<>(List.of(Weather.values()));
+    /**
+     * A random variable used to generate forecasts, and current weather.
+     * This is not a real weather app, after all1
+     */
     private final static Random random = new Random(System.currentTimeMillis());
 
+    /**
+     * Get a random value from the weather
+     * @return a weather
+     */
     private final Weather randomWeather() {
-        Collections.shuffle(weathers);
-        return weathers.get(0);
+        var weathers = Weather.values();
+        return weathers[random.nextInt(weathers.length)];
     }
 
+    /**
+     * The current weather is not a forecast.
+     * @return
+     */
     public Weather currentWeather() {
         return randomWeather();
     }
 
-    public Forecast getForecast(LocalDateTime localDateTime) {
+    /**
+     * Make a prediction about the weather in the future.
+     * @param requestedForecastDate
+     * @return a forecast for the weather at the {@code requestedForecastDate}
+     */
+    public Forecast getForecast(LocalDateTime requestedForecastDate) {
+        if(requestedForecastDate.isBefore(LocalDateTime.now())){
+            throw new IllegalArgumentException("Historical weather does not need a forecast.");
+        }
         return Forecast.builder()
                 .weather(randomWeather())
                 .probability(random.nextInt(100))
